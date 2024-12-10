@@ -1,36 +1,29 @@
 import pandas as pd
 
-# a.csvとb.csvを読み込む（header=Noneで1行目もデータとして扱う）
+# a.csvとb.csvを読み込む
 a_df = pd.read_csv('a.csv', header=None)
 b_df = pd.read_csv('b.csv', header=None)
 
-# 比較する列番号（n列目）を指定（1列目、2列目、...）
+# 比較する列番号
 n = 1  # 比較対象の列番号
-m = 2  # 出力したいm列目の番号（例えば2列目）
+m = 2  # 出力したいm列目の番号
 
-# 一致した行の結果を保存するリスト
 output_rows = []
 
-# 一致した行を処理
 for i, row_a in a_df.iterrows():
     for j, row_b in b_df.iterrows():
-        if row_a[n-1] == row_b[n-1]:  # n列目が一致する場合
-            # a.csvのn列目の文字列、a.csvのm列目の文字列、b.csvのm列目の文字列を出力
+        if row_a[n-1] == row_b[n-1]:
             output_rows.append([row_a[n-1], row_a[m-1], row_b[m-1]])
 
-            # 一致した内容を表示
             print(f"一致した行：a.csvの行{i+1}とb.csvの行{j+1}が一致")
             print(f"a.csvのn列目: {row_a[n-1]}")
             print(f"a.csvのm列目: {row_a[m-1]}")
             print(f"b.csvのm列目: {row_b[m-1]}")
             print("-" * 40)
 
-# 結果を新しいデータフレームとしてまとめる
 output_df = pd.DataFrame(output_rows, columns=[f'a.csvのn列目', f'a.csvのm列目', f'b.csvのm列目'])
 
-# 結果を表示
 print("一致した行の結合結果：")
 print(output_df)
 
-# 新しいCSVとして保存する
 output_df.to_csv('output.csv', index=False)
