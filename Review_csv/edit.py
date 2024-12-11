@@ -1,6 +1,6 @@
 import pandas as pd
 
-
+# a.csvとb.csvを読み込む
 a_df = pd.read_csv('a.csv', header=None)
 b_df = pd.read_csv('b.csv', header=None)
 
